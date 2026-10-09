@@ -1,0 +1,256 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Un jardín para ti 💜</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: Arial, sans-serif;
+  color: white;
+  background: linear-gradient(
+    160deg, #10051e, #291044, #542579, #170925
+  );
+}
+
+.jardin {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.estrella {
+  position: absolute;
+  color: #e7c8ff;
+  animation: brillar 2s infinite alternate;
+}
+
+@keyframes brillar {
+  from { opacity: .2; transform: scale(.7); }
+  to { opacity: 1; transform: scale(1.4); }
+}
+
+.petalos {
+  position: fixed;
+  top: -40px;
+  z-index: 1;
+  pointer-events: none;
+  animation: caer linear infinite;
+}
+
+@keyframes caer {
+  to {
+    transform: translateY(110vh) rotate(720deg);
+  }
+}
+
+.contenedor {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 25px 16px;
+}
+
+.tarjeta {
+  width: 100%;
+  max-width: 440px;
+  padding: 30px 22px;
+  text-align: center;
+  border: 1px solid #e5baff66;
+  border-radius: 28px;
+  background: #1c0c30b8;
+  box-shadow: 0 0 35px #b45cff35;
+  backdrop-filter: blur(8px);
+  animation: aparecer 1.5s ease both;
+}
+
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(25px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+  color: #e6c1ff;
+  font-size: clamp(26px, 7vw, 35px);
+  margin-bottom: 12px;
+  text-shadow: 0 0 18px #c46cff;
+}
+
+.subtitulo {
+  color: #f0dcff;
+  font-size: 15px;
+  margin-bottom: 18px;
+}
+
+.flor {
+  font-size: 65px;
+  margin: 15px 0;
+  animation: bailar 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 16px #ce9aff);
+}
+
+@keyframes bailar {
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  50% { transform: translateY(-12px) rotate(5deg); }
+}
+
+button {
+  border: none;
+  border-radius: 30px;
+  padding: 13px 22px;
+  margin: 12px 0;
+  font-size: 15px;
+  font-weight: bold;
+  color: #35134d;
+  background: linear-gradient(90deg, #e6c1ff, #f7d9ff);
+  box-shadow: 0 0 18px #c77bff55;
+  cursor: pointer;
+  transition: transform .2s;
+}
+
+button:active {
+  transform: scale(.95);
+}
+
+#carta {
+  display: none;
+  margin-top: 18px;
+  line-height: 1.8;
+  color: #f6eaff;
+  animation: aparecer 1s ease;
+}
+
+#carta.visible {
+  display: block;
+}
+
+.firma {
+  color: #dcb0ff;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+footer {
+  margin-top: 20px;
+  color: #cdb2e2;
+  font-size: 12px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="jardin" id="jardin"></div>
+
+<main class="contenedor">
+  <section class="tarjeta">
+
+    <p class="subtitulo">✧ Un pequeño detalle para alguien especial ✧</p>
+
+    <h1>Mi jardín para ti 💜</h1>
+
+    <div class="flor">🪻</div>
+
+    <p>
+      Si pudiera regalarte algo tan bonito
+      como lo que deseo para ti,
+      llenaría tu mundo de flores moradas.
+    </p>
+
+    <button onclick="abrirCarta()">
+      Abre tu pequeña sorpresa 💌
+    </button>
+
+    <div id="carta">
+      <p>
+        🌷 Para ti, personita especial 🌷
+      </p>
+
+      <p>
+        Quiero que nunca te falten motivos para sonreír,
+        que incluso en los días nublados encuentres
+        un poquito de luz y que la vida te regale
+        momentos tan bonitos como los que mereces.
+      </p>
+
+      <p>
+        Estas florecitas son pequeñas,
+        pero llevan un deseo enorme:
+        que estés bien, que seas feliz
+        y que nunca olvides lo especial que eres. 💜
+      </p>
+
+      <p style="font-size:25px">
+        🪻🌸💜🌸🪻
+      </p>
+
+      <p class="firma">
+        Con mucho cariño, para ti. ✨
+      </p>
+    </div>
+
+    <footer>
+      Hecho con cariño y un poquito de magia 💜
+    </footer>
+
+  </section>
+</main>
+
+<script>
+function abrirCarta() {
+  const carta = document.getElementById("carta");
+  carta.classList.toggle("visible");
+
+  if (carta.classList.contains("visible")) {
+    document.querySelector("button").textContent =
+      "Guardar esta sorpresa 💜";
+  } else {
+    document.querySelector("button").textContent =
+      "Abre tu pequeña sorpresa 💌";
+  }
+}
+
+const jardin = document.getElementById("jardin");
+
+for (let i = 0; i < 35; i++) {
+  const estrella = document.createElement("span");
+  estrella.className = "estrella";
+  estrella.textContent = "✦";
+  estrella.style.left = Math.random() * 100 + "%";
+  estrella.style.top = Math.random() * 100 + "%";
+  estrella.style.fontSize = (8 + Math.random() * 12) + "px";
+  estrella.style.animationDelay = Math.random() * 3 + "s";
+  jardin.appendChild(estrella);
+}
+
+for (let i = 0; i < 18; i++) {
+  const petalo = document.createElement("span");
+  petalo.className = "petalos";
+  petalo.textContent = Math.random() > .5 ? "✿" : "❀";
+  petalo.style.left = Math.random() * 100 + "%";
+  petalo.style.fontSize = (12 + Math.random() * 17) + "px";
+  petalo.style.color = ["#e4b5ff", "#c99aff", "#f0d4ff"][
+    Math.floor(Math.random() * 3)
+  ];
+  petalo.style.animationDuration = (7 + Math.random() * 12) + "s";
+  petalo.style.animationDelay = (-Math.random() * 15) + "s";
+  jardin.appendChild(petalo);
+}
+</script>
+
+</body>
+</html>
